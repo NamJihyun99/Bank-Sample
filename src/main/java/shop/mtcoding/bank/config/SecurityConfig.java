@@ -36,6 +36,14 @@ public class SecurityConfig {
         http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
         http.formLogin().disable();
         http.httpBasic().disable(); // 브라우저 팝업창 사용한 사용자 인증 사용하지 않음
+
+        //Exception 인터셉터
+        http.exceptionHandling().authenticationEntryPoint((request, response, authException) -> {
+            response.setContentType("application/json; charset=utf-8");
+            response.setStatus(403);
+            response.getWriter().println("error");
+        });
+
         http.authorizeRequests()
                 .antMatchers("/api/s/**").authenticated()
                 .antMatchers("/api/admin/**").hasRole(""+UserEnum.ADMIN)   // ROLE_ADMIN
