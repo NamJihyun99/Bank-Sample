@@ -1,5 +1,6 @@
 package shop.mtcoding.bank.config;
 
+import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
@@ -27,7 +28,7 @@ public class SecurityConfigTest {
         System.out.println("test = " + status);
 
         // then
-
+        Assertions.assertThat(status).isEqualTo(401);
     }
 
     @Test
@@ -35,8 +36,13 @@ public class SecurityConfigTest {
         // given
 
         // when
+        ResultActions resultActions = mvc.perform(MockMvcRequestBuilders.get("/api/admin/hello"));
+        String responseBody = resultActions.andReturn().getResponse().getContentAsString();
+        int status = resultActions.andReturn().getResponse().getStatus();
+        System.out.println("test = " + responseBody);
+        System.out.println("test = " + status);
 
         // then
-
+        Assertions.assertThat(status).isEqualTo(401);
     }
 }

@@ -1,5 +1,6 @@
 package shop.mtcoding.bank.config;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.context.annotation.Bean;
@@ -12,6 +13,8 @@ import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 import shop.mtcoding.bank.domain.user.UserEnum;
+import shop.mtcoding.bank.dto.ResponseDto;
+import shop.mtcoding.bank.util.CustomResponseUtil;
 
 @Configuration
 public class SecurityConfig {
@@ -39,9 +42,7 @@ public class SecurityConfig {
 
         //Exception 인터셉터
         http.exceptionHandling().authenticationEntryPoint((request, response, authException) -> {
-            response.setContentType("application/json; charset=utf-8");
-            response.setStatus(403);
-            response.getWriter().println("error");
+            CustomResponseUtil.unAuthentication(response, "로그인 필요");
         });
 
         http.authorizeRequests()
