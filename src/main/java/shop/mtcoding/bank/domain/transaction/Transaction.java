@@ -15,7 +15,7 @@ import java.time.LocalDateTime;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Getter
 @EntityListeners(AuditingEntityListener.class)
-@Table(name = "transaction_db")
+@Table(name = "transaction_tb")
 @Entity
 public class Transaction {
 

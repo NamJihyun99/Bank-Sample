@@ -19,7 +19,7 @@ public class SecurityConfig {
     private final Logger log = LoggerFactory.getLogger(getClass());
     @Bean
     public BCryptPasswordEncoder passwordEncoder() {
-        log.debug("debug: BCryptPasswordEncoder bean registered");
+        log.debug("debug: BCryptPasswordEncoder bean is registered.");
         return new BCryptPasswordEncoder();
     }
 
@@ -27,11 +27,12 @@ public class SecurityConfig {
 
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
+        log.debug("debug: FilterChain bean is registered.");
         http.headers().frameOptions().disable();    // iframe 허용 안함
         http.csrf().disable();  // postman 작동 위해
         http.cors().configurationSource(configurationSource());
 
-        // jSeesionId를 서버에서 관리하지 않음
+        // jSessionId를 서버에서 관리하지 않음
         http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
         http.formLogin().disable();
         http.httpBasic().disable(); // 브라우저 팝업창 사용한 사용자 인증 사용하지 않음
@@ -44,6 +45,7 @@ public class SecurityConfig {
     }
 
     public CorsConfigurationSource configurationSource() {
+        log.debug("debug: configurationSource cors settings are registered in FilterChain bean.");
         CorsConfiguration configuration = new CorsConfiguration();
         configuration.addAllowedHeader("*");
         configuration.addAllowedMethod("*");
@@ -52,7 +54,6 @@ public class SecurityConfig {
 
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
         source.registerCorsConfiguration("/**", configuration);
-
         return source;
     }
 }
