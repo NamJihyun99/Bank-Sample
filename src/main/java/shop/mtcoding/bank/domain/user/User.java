@@ -32,7 +32,7 @@ public class User {
     private String email;
 
     @Column(nullable = false, length = 20)
-    private String fullname;
+    private String fullName;
 
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
@@ -47,12 +47,12 @@ public class User {
     private LocalDateTime updatedAt;
 
     @Builder
-    public User(Long id, String username, String password, String email, String fullname, UserEnum role, LocalDateTime createdAt, LocalDateTime updatedAt) {
+    public User(Long id, String username, String password, String email, String fullName, UserEnum role, LocalDateTime createdAt, LocalDateTime updatedAt) {
         this.id = id;
         this.username = username;
         this.password = password;
         this.email = email;
-        this.fullname = fullname;
+        this.fullName = fullName;
         this.role = role;
         this.createdAt = createdAt;
         this.updatedAt = updatedAt;
