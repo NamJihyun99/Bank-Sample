@@ -8,25 +8,26 @@ import shop.mtcoding.bank.domain.user.UserEnum;
 
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Size;
 
 public class UserReqDto {
     @Getter
     @Setter
     public static class JoinReqDto {
 
-        @Pattern(regexp = "", message = "영문/숫자 2~20자 이내로 작성해주세요.")
+        @Pattern(regexp = "[a-zA-Z\\d]{2,20}+", message = "영문/숫자 2~20자 이내로 작성해주세요.")
         @NotEmpty
         private String username;
 
-        @Pattern(regexp = "", message = "영문/숫자 1~20자 이내로 작성해주세요.")
+        @Size(min = 4, max = 20)
         @NotEmpty
         private String password;
 
-        @Pattern(regexp = "", message = "이메일 형식에 맞게 작성해주세요.")
+        @Pattern(regexp = "[a-zA-Z\\d]{2,10}+@[a-zA-Z\\d]{2,6}+\\.[a-zA-Z]{3,5}+", message = "이메일 형식에 맞게 작성해주세요.")
         @NotEmpty
         private String email;
 
-        @Pattern(regexp = "", message = "영문/한글 1~20자 이내로 작성해주세요.")
+        @Pattern(regexp = "[가-힣a-zA-Z]{1,20}+", message = "영문/한글 1~20자 이내로 작성해주세요.")
         @NotEmpty
         private String fullName;
 
